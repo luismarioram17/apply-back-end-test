@@ -68,12 +68,25 @@ This project uses [NestJS](https://nestjs.com/) and [PostgreSQL](https://www.pos
    npm run start:dev
    ```
 
+### 🌱 Seeding Users
+
+After the database is running, you can seed initial users (admin and user) with:
+
+```bash
+npm run seed:users
+```
+
+This will create two users with hashed passwords in the database.
+
+> **Note:** The normally the provision of users would come from an Identity provider, like google accounts, AWS or Azure, but for simplicity they were provided to the database.
+
 ## 🛠️ Scripts
 
 - `npm run start:dev` — Start the server in development mode
 - `npm run build` — Build the project
 - `npm run test` — Run unit tests
 - `npm run test:e2e` — Run end-to-end tests
+- `npm run seed:users` — Seed the database with initial users
 
 ## ⚙️ Environment Variables
 
@@ -95,3 +108,7 @@ This project uses [NestJS](https://nestjs.com/) and [PostgreSQL](https://www.pos
 - `Dockerfile` — Docker build instructions
 
 ---
+
+## 💡 Seeding Approach Explanation
+
+_Explain here why you chose this seeding approach._
