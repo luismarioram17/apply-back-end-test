@@ -19,7 +19,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: nest-docker-postgres
+    container_name: apply-service
     environment:
       - PORT=${PORT}
     ports:
@@ -27,7 +27,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./src:/app/src
+      - ./:/app/
 
 volumes:
   pgdata:
