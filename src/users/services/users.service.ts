@@ -15,7 +15,7 @@ export class UsersService {
    * @param identifier - The username or email of the user.
    * @returns A promise that resolves to the user if found, or null if not found.
    */
-  async findOne(identifier: string): Promise<User | null> {
+  async findUser(identifier: string): Promise<User | null> {
     return this.userRepository.findOne({
       where: [{ username: identifier }, { email: identifier }],
     });
