@@ -1,4 +1,4 @@
-import { AccessTokenDto } from '@auth/controllers/dtos/access-token.dto';
+import { AccessTokenDto } from '@auth/dtos';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserDoc } from '@users/docs';

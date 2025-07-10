@@ -100,7 +100,8 @@
       "\\.dto\\.ts$",
       "\\main\\.ts$",
       "\\ormconfig\\.ts$",
-      "\\.seed\\.ts$"
+      "\\.seed\\.ts$",
+      "\\index\\.ts$"
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"

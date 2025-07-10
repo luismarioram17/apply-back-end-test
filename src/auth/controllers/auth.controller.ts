@@ -1,5 +1,5 @@
-import { RequestUser } from '@auth/decorators/request-user.decorator';
-import { LoginDto } from '@auth/dtos/login.dto';
+import { RequestUser } from '@auth/decorators';
+import { LoginDto } from '@auth/dtos';
 import { UseLocalAuth } from '@auth/guards/local-auth.guard';
 import { AuthService } from '@auth/services';
 import { Controller, Post } from '@nestjs/common';
