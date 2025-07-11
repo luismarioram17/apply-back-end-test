@@ -15,14 +15,28 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: 'checkout code'
+      - name: '👓Checkout code'
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: 'lint code'
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: 'main'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: '💿 Setup Node.js'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: '👀 Install dependencies'
+        run: npm ci
+
+      - name: '💅 Run lint'
+        run: npm run lint
+
+      - name: '✅ Run tests'
+        run: npm run test
+
+      - name: '🫥 Check coverage threshold'
+        run: |
+          COVERAGE=$(npx jest --coverage --coverageReporters=text-summary | grep 'Statements' | awk '{print $3}' | sed 's/%//')
+          echo "Statements coverage: $COVERAGE%"
+          if (( $(echo "$COVERAGE < 80" | bc -l) )); then
+            echo "Statement coverage is below 80%!" && exit 1
+          fi
+        shell: bash
