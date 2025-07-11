@@ -19,6 +19,15 @@ async function bootstrap() {
     .setTitle('Apply technical assestment API')
     .setDescription('technical assessment for a job application')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        in: 'header',
+      },
+      'jwt',
+    )
     .addTag('apply')
     .build();
 

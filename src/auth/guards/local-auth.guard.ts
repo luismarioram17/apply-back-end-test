@@ -1,6 +1,9 @@
-import { UseGuards, applyDecorators } from '@nestjs/common';
+import { Injectable, UseGuards, applyDecorators } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
+@Injectable()
+export class LocalAuthGuard extends AuthGuard('local') {}
+
 export function UseLocalAuth() {
-  return applyDecorators(UseGuards(AuthGuard('local')));
+  return applyDecorators(UseGuards(LocalAuthGuard));
 }

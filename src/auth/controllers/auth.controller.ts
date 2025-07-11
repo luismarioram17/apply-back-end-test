@@ -1,4 +1,4 @@
-import { RequestUser } from '@auth/decorators';
+import { LocalRequestUser } from '@auth/decorators';
 import { LoginDto } from '@auth/dtos';
 import { UseLocalAuth } from '@auth/guards/local-auth.guard';
 import { AuthService } from '@auth/services';
@@ -33,7 +33,7 @@ export class AuthController {
     description: 'User login credentials',
   })
   @UseLocalAuth()
-  signIn(@RequestUser() user: UserDoc) {
+  signIn(@LocalRequestUser() user: UserDoc) {
     return this.authService.login(user);
   }
 }
