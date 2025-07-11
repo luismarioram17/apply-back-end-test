@@ -29,14 +29,14 @@ jobs:
       - name: '💅 Run lint'
         run: npm run lint
 
-      - name: '✅ Run tests'
+      - name: '🧪 Run tests'
         run: npm run test
 
       - name: '🫥 Check coverage threshold'
         run: |
           COVERAGE=$(npx jest --coverage --coverageReporters=text-summary | grep 'Statements' | awk '{print $3}' | sed 's/%//')
-          echo "Statements coverage: $COVERAGE%"
+          echo "🔎 Statements coverage: $COVERAGE%"
           if (( $(echo "$COVERAGE < 80" | bc -l) )); then
-            echo "Statement coverage is below 80%!" && exit 1
+            echo "❌ Statement coverage is below 80%!" && exit 1
           fi
         shell: bash
