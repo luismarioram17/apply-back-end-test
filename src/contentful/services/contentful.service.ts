@@ -7,10 +7,17 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as contentful from 'contentful';
 
+/**
+ * Service for interacting with the Contentful CMS API.
+ */
 @Injectable()
 export class ContentfulService {
   private client: contentful.ContentfulClientApi<undefined>;
 
+  /**
+   * Initializes the Contentful client using configuration values.
+   * @param configService - The NestJS ConfigService for accessing environment variables.
+   */
   constructor(private readonly configService: ConfigService) {
     this.client = contentful.createClient({
       accessToken: this.configService.get<string>(
@@ -22,6 +29,14 @@ export class ContentfulService {
     });
   }
 
+  /**
+   * Fetches content entries of a given type from Contentful, with optional date filters.
+   *
+   * @template T - The type of the contentful entry fields.
+   * @param {string} type - The content type to fetch.
+   * @param {FiltersDto} [filters] - Optional filters for creation date range.
+   * @returns {Promise<ContentfulResponseDto<T>>} The fetched contentful entries and metadata.
+   */
   async getContent<T>(
     type: string,
     filters?: FiltersDto,

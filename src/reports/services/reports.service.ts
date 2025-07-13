@@ -3,6 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from '@products/entities';
 import { Between, IsNull, LessThan, Not, Repository } from 'typeorm';
 
+/**
+ * Service for generating product-related reports and statistics.
+ */
 @Injectable()
 export class ReportsService {
   constructor(
@@ -10,7 +13,22 @@ export class ReportsService {
     private readonly productRepository: Repository<Product>,
   ) {}
 
-  async getProductStats(startDate?: Date, endDate?: Date) {
+  /**
+   * Get product statistics as percentages for deleted, without price, within date range, and low stock products.
+   *
+   * @param {Date} [startDate] - Optional start date for the within-range calculation.
+   * @param {Date} [endDate] - Optional end date for the within-range calculation.
+   * @returns {Promise<{ percentageDeleted: string; percentageWithoutPrice: string; percentageWithinRange: string; percentageLowStock: string; }>} JSON object with percentage strings for each metric.
+   */
+  async getProductStats(
+    startDate?: Date,
+    endDate?: Date,
+  ): Promise<{
+    percentageDeleted: string;
+    percentageWithoutPrice: string;
+    percentageWithinRange: string;
+    percentageLowStock: string;
+  }> {
     const lowStock = await this.productRepository.count({
       where: { stock: LessThan(10) },
     });

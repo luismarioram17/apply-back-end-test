@@ -5,6 +5,9 @@ import { Product } from '@products/entities';
 import { paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
 
+/**
+ * Service for managing products, including creation, filtering, retrieval, and deletion.
+ */
 @Injectable()
 export class ProductsService {
   constructor(
@@ -17,6 +20,11 @@ export class ProductsService {
    * @param dto - CreateProductDto
    * @returns
    */
+  /**
+   * Create a new product in the database.
+   * @param dto - Data Transfer Object containing product details.
+   * @returns The saved product entity.
+   */
   async create(dto: CreateProductDto) {
     return this.productRepository.save(dto);
   }
@@ -25,6 +33,11 @@ export class ProductsService {
    * Find products applying filters
    * @param pagination - PaginationDto
    * @returns
+   */
+  /**
+   * Find products applying optional filters and pagination.
+   * @param pagination - Pagination and filter options.
+   * @returns Paginated list of products matching the filters.
    */
   async find(pagination: PaginationDto): Promise<Pagination<Product>> {
     const { limit, page, category, name, maxPrice, minPrice } = pagination;
@@ -61,6 +74,12 @@ export class ProductsService {
     });
   }
 
+  /**
+   * Find a single product by its ID.
+   * @param id - The product ID.
+   * @throws NotFoundException if the product does not exist.
+   * @returns The found product entity.
+   */
   async findOne(id: string) {
     const result = await this.productRepository.findOneBy({
       id,
@@ -71,9 +90,13 @@ export class ProductsService {
     return result;
   }
 
+  /**
+   * Soft delete a product by its ID.
+   * @param id - The product ID to delete.
+   * @throws NotFoundException if the product does not exist.
+   */
   async delete(id: string) {
     const toDelete = await this.findOne(id);
-
     await this.productRepository.softDelete(toDelete.id);
   }
 }
