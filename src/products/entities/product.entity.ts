@@ -1,5 +1,14 @@
-import { timestampType } from '@common/db/types.db';
-import { Column, DeleteDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  ColumnType,
+  DeleteDateColumn,
+  Entity,
+  PrimaryColumn,
+} from 'typeorm';
+
+export const timestampType: () => ColumnType = () => {
+  return process.env.NODE_ENV === 'test' ? 'text' : 'timestamp';
+};
 
 @Entity()
 export class Product {
