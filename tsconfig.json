@@ -21,6 +21,8 @@
       "@auth/*": ["./auth/*"],
       "@users/*": ["./users/*"],
       "@common/*": ["./common/*"],
+      "@products/*": ["./products/*"],
+      "@contentful/*": ["./contentful/*"]
     }
   }
 }
