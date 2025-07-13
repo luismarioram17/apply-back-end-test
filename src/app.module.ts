@@ -1,6 +1,8 @@
 import { AuthModule } from '@auth/auth.module';
+import { ContentfulModule } from '@contentful/contentful.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -23,7 +25,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         logging: configService.get<string>('DB_LOGGING', 'false') === 'true',
       }),
     }),
+    ScheduleModule.forRoot(),
     AuthModule,
+    ContentfulModule,
   ],
 })
 export class AppModule {}
