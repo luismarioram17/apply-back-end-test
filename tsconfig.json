@@ -22,7 +22,8 @@
       "@users/*": ["./users/*"],
       "@common/*": ["./common/*"],
       "@products/*": ["./products/*"],
-      "@contentful/*": ["./contentful/*"]
+      "@contentful/*": ["./contentful/*"],
+      "@reports/*": ["./reports/*"]
     }
   }
 }

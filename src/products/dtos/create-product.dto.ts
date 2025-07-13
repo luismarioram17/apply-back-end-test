@@ -13,7 +13,7 @@ export class CreateProductDto {
 
   color: string;
 
-  price: number;
+  price?: number;
 
   currency: string;
 

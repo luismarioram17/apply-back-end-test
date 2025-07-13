@@ -1,5 +1,5 @@
 import { timestampType } from '@common/db/types.db';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, DeleteDateColumn, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Product {
@@ -24,8 +24,8 @@ export class Product {
   @Column()
   color: string;
 
-  @Column({ type: 'float' })
-  price: number;
+  @Column({ type: 'float', nullable: true })
+  price?: number;
 
   @Column()
   currency: string;
@@ -38,4 +38,7 @@ export class Product {
 
   @Column({ type: timestampType(), nullable: true })
   updatedAt?: Date;
+
+  @DeleteDateColumn()
+  deletedAt?: Date;
 }

@@ -74,6 +74,6 @@ export class ProductsService {
   async delete(id: string) {
     const toDelete = await this.findOne(id);
 
-    await this.productRepository.delete(toDelete.id);
+    await this.productRepository.softDelete(toDelete.id);
   }
 }

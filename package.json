@@ -92,7 +92,8 @@
       "^@common/(.*)$": "<rootDir>/common/$1",
       "^@products/(.*)$": "<rootDir>/products/$1",
       "^@modules/(.*)$": "<rootDir>/modules/$1",
-      "^@contentful/(.*)$": "<rootDir>/contentful/$1"
+      "^@contentful/(.*)$": "<rootDir>/contentful/$1",
+      "^@reports/(.*)$": "<rootDir>/reports/$1"
     },
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
