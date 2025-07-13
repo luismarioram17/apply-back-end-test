@@ -33,7 +33,10 @@ export class ContentfulService {
       content_type: type,
     };
 
-    const { creationStartDate: updateStartDateTime, creationEndDate: updateEndDateTime } = filters || {};
+    const {
+      creationStartDate: updateStartDateTime,
+      creationEndDate: updateEndDateTime,
+    } = filters || {};
 
     if (updateStartDateTime) {
       contentfulFilters['sys.createdAt[gt]'] =
