@@ -290,6 +290,13 @@ describe('ProductsService', () => {
       expect(resultNoDates).toEqual(storedProductNoDates);
     });
 
+    it('should throw NotFoundException if product does not exist', async () => {
+      const nonExistentId = 'non-existent-id';
+      await expect(service.findOne(nonExistentId)).rejects.toThrow(
+        'Product not found',
+      );
+    });
+
     it('should return only products with price over min price', async () => {
       await repository.clear();
 
@@ -327,6 +334,13 @@ describe('ProductsService', () => {
       const result = await repository.findOneBy({ id: temporaryProduct.id });
 
       expect(result).toBeNull();
+    });
+
+    it('should throw NotFoundException if product to delete does not exist', async () => {
+      const nonExistentId = 'non-existent-id';
+      await expect(service.delete(nonExistentId)).rejects.toThrow(
+        'Product not found',
+      );
     });
   });
 });

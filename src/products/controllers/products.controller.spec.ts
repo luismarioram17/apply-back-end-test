@@ -6,6 +6,7 @@ describe('ProductsController', () => {
   let controller: ProductsController;
   const mockService = {
     find: jest.fn(),
+    delete: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -43,6 +44,19 @@ describe('ProductsController', () => {
         items: [],
       });
       expect(mockService.find).toHaveBeenCalledWith(paginationDto);
+    });
+  });
+
+  describe('deleteProduct', () => {
+    it('should call service with id and return result', async () => {
+      const id = 'test-id';
+      const expectedResult = { success: true };
+      mockService.delete.mockResolvedValue(expectedResult);
+
+      const result = await controller.deleteProduct(id);
+
+      expect(result).toBe(expectedResult);
+      expect(mockService.delete).toHaveBeenCalledWith(id);
     });
   });
 });
