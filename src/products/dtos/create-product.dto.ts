@@ -19,7 +19,7 @@ export class CreateProductDto {
 
   stock: number;
 
-  createdAt: Date;
+  createdAt?: Date;
 
-  updatedAt: Date;
+  updatedAt?: Date;
 }

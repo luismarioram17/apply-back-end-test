@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateProductDto, PaginationDto } from '@products/dtos';
 import { Product } from '@products/entities';
@@ -32,25 +32,25 @@ export class ProductsService {
     const qb = this.productRepository.createQueryBuilder('product');
 
     if (category) {
-      qb.where('product.category ILIKE :category', {
-        category: `%${category}%`,
+      qb.andWhere('LOWER(product.category) LIKE :category', {
+        category: `%${category.toLowerCase()}%`,
       });
     }
 
     if (name) {
-      qb.where('product.name ILIKE :name', {
-        name: `%${name}%`,
+      qb.andWhere('LOWER(product.name) LIKE :name', {
+        name: `%${name.toLowerCase()}%`,
       });
     }
 
     if (minPrice) {
-      qb.where('product.price >= :minPrice', {
+      qb.andWhere('product.price >= :minPrice', {
         minPrice,
       });
     }
 
     if (maxPrice) {
-      qb.where('product.price <= :maxPrice', {
+      qb.andWhere('product.price <= :maxPrice', {
         maxPrice,
       });
     }
@@ -59,5 +59,21 @@ export class ProductsService {
       page: page || 1,
       limit: limit || 5,
     });
+  }
+
+  async findOne(id: string) {
+    const result = await this.productRepository.findOneBy({
+      id,
+    });
+
+    if (!result) throw new NotFoundException('Product not found');
+
+    return result;
+  }
+
+  async delete(id: string) {
+    const toDelete = await this.findOne(id);
+
+    await this.productRepository.delete(toDelete.id);
   }
 }

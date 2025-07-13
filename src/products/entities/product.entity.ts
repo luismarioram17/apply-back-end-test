@@ -33,9 +33,9 @@ export class Product {
   @Column()
   stock: number;
 
-  @Column({ type: timestampType() })
-  createdAt: Date;
+  @Column({ type: timestampType(), nullable: true })
+  createdAt?: Date;
 
-  @Column({ type: timestampType() })
-  updatedAt: Date;
+  @Column({ type: timestampType(), nullable: true })
+  updatedAt?: Date;
 }
